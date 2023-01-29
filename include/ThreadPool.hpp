@@ -8,6 +8,7 @@
 #include <condition_variable>
 #include <cstdint>
 #include <vector>
+#include <atomic>
 
 class ThreadPool
 {
@@ -18,7 +19,7 @@ private:
     std::condition_variable cond_;
     std::vector<std::function<void()>> tasks_;
     std::vector<std::thread> threads_;
-    bool running_;
+    std::atomic_bool running_;
 
     void ThreadEntry() noexcept;
 public:
